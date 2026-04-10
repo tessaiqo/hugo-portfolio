@@ -106,7 +106,7 @@ Connection: close
 ```
 **Что важно:** в поле `args` сервер вернул переданный параметр, а в `headers` — какие заголовки он получил. Это доказывает, что запрос сформирован правильно.
 
-### СКРИНШОТ 1
+![get1](/hugo-portfolio/images/get1.jpg)
 
 ### 2.2 POST-запрос через Telnet
 
@@ -144,7 +144,7 @@ HTTP/1.1 200 OK
 - Поле `json`показывает, что сервер распарсил JSON.
 - Поле `data`— сырая строка, которую мы отправили.
 
-### СКРИНШОТ 2
+![post1](/hugo-portfolio/images/post1.jpg)
 
 ### 2.3 Альтернатива: Netcat (одной строкой)
 Netcat позволяет отправить запрос без интерактивного режима.
@@ -182,7 +182,7 @@ curl -X GET "https://httpbin.org/get?message=hello_from_mac" -H "User-Agent: Moz
 }
 ```
 
-### СКРИНШОТ 3
+![get-url](/hugo-portfolio/images/geturl.jpg)
 
 ### 3.2 POST-запрос через cURL
 ```bash
@@ -199,7 +199,7 @@ curl -X POST "https://httpbin.org/post" -H "Content-Type: application/json" -d '
     "method": "POST"
 }
 ```
-### СКРИНШОТ 4
+![post-url](/hugo-portfolio/images/posturl.jpg)
 
 ## 4.Выполнение задания 3: установка GUI-инструмента
 **Выбранный инструмент:** Insomnia (бесплатный, удобный интерфейс).
@@ -211,7 +211,8 @@ brew install --cask insomnia
 
 После установки запускаем Insomnia. Создаём новую коллекцию и первый запрос.
 
-### СКРИНШОТ 5-6
+![insomnia](/hugo-portfolio/images/insomnia.jpg)
+![insomnia2](/hugo-portfolio/images/insomnia2.jpg)
 
 ## 5. Выполнение задания 4: GET-запрос к API Банка России (курс валюты за период)
 **Цель:** получить курс одной выбранной валюты за выбранный период (задать любые значения), используя API Банка России.**Мой выбор:** курс доллара США с 1 по 4 апреля 2026 года.
@@ -252,7 +253,7 @@ https://www.cbr.ru/scripts/XML_dynamic.asp?date_req1=01/04/2026&date_req2=04/04/
 **Выбранная валюта:** USD (доллар США)
 **Курс на 4 апреля 2026 года:** 79,7293 руб.
 
-### СКРИНШОТ 7
+![usd](/hugo-portfolio/images/usd.jpg)
 
 ### 5.3 Примечание
 GET-метод `XML_dynamic.asp` официально считается устаревшим (рекомендуется SOAP через POST), но он полностью рабочий и подходит для учебных целей, так как задание требует именно GET-запрос.
