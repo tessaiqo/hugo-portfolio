@@ -2,7 +2,6 @@
 title = "Создание проекта с использованием Webpack"
 date = "2026-04-23"
 description = "Отчёт по заданию"
-
 tags = ["hugo", "theme", "web-development", "open-source"]
 categories = ["web"]
 featured = true
