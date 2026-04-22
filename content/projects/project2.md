@@ -5,7 +5,7 @@ description = "Проект посвящён сохранению памяти �
 
 tags = ["hugo", "theme", "web-development", "open-source"]
 categories = ["web"]
-featured = true
+featured = false
 +++
 
 
