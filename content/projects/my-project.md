@@ -5,7 +5,7 @@ description = "Веб-сайт для тату-магазина с возмож�
 
 tags = ["hugo", "theme", "web-development", "open-source"]
 categories = ["web"]
-featured = true
+featured = false
 +++
 
 
