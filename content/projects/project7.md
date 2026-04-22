@@ -8,6 +8,7 @@ categories = ["web"]
 featured = true
 +++
 
+![luxontime](/hugo-portfolio/images/luxontime.jpg)
 
 ## 1. Введение
 
@@ -290,7 +291,10 @@ npx serve .
 ```
 Приложение доступно по адресу `http://localhost:3000`. На странице отображаются 3D-кубики, показывающие текущее время, и крупная строка с полной датой и временем.
 
-## ДВА СКРИНШОТААА ПЕРВЫХ
+![npx-webpack](/hugo-portfolio/images/npx-webpack.jpg)
+
+
+![successful-launch-webpack](/hugo-portfolio/images/successful-launch-webpack.jpg)
 
 
 ## 6. Контейнеризация приложения с помощью Docker
@@ -314,7 +318,8 @@ npx serve .
 ### 6.2 Разработка Dockerfile
 
 Для проекта был создан файл Dockerfile в корневой директории. Приведём его содержимое и подробно разберём назначение каждой инструкции.
-## СКРИН ДОКЕРФАЙЛА
+
+![dockerfile](/hugo-portfolio/images/dockerfile.jpg)
 
 **Анализ инструкций**
 
@@ -350,7 +355,7 @@ docker build -t dice-clock .
 
 Флаг `-t dice-clock задаёт` имя образа. Процесс сборки отображается в терминале. При успешном завершении выводится сообщение `naming to docker.io/library/dice-clock:latest`.
 
-## СКРИН 3
+![run](/hugo-portfolio/images/run3000.jpg)
 
 
 ### 6.4 Запуск контейнера
@@ -364,8 +369,9 @@ docker run -p 3000:3000 dice-clock
 
 Приложение успешно открывается в браузере по адресу `http://localhost:3000` и функционирует идентично локальному запуску.
 
+![dockerDesktop](/hugo-portfolio/images/dockerDesktop.jpg)
+![docker-run](/hugo-portfolio/images/docker-run.jpg)
 
-## СКРИН 4-5
 
 ### 6.5 Обоснование выбора технологий в Docker-части
 
