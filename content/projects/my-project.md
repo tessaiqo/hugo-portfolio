@@ -2,7 +2,6 @@
 title = "Тату-магазин (Разработка серверной части)"
 date = "2025-09-01"
 description = "Веб-сайт для тату-магазина с возможностью просмотра каталога, фильтрации и добавления товаров в корзину. "
-
 tags = ["hugo", "theme", "web-development", "open-source"]
 categories = ["web"]
 featured = false
