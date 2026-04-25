@@ -1,11 +1,14 @@
 +++
-title = "Создание проекта с использованием Webpack"
+title = "Webpack"
 date = "2026-04-22"
 description = "Отчёт по заданию"
 tags = ["hugo", "theme", "web-development", "open-source"]
 categories = ["web"]
 featured = true
 +++
+---
+# Этап №1
+---
 
 ![luxontime](/hugo-portfolio/images/luxontime.jpg)
 
@@ -403,3 +406,165 @@ docker run -p 3000:3000 dice-clock
 
 
 
+---
+# Этап №2
+---
+
+## 1. Цель работы
+
+Создать веб-страницу с использованием Bootstrap 5, в которой по нажатию на красную кнопку открывается модальное окно. В окне выводится имя выполнившего задание и текущая дата/время, формируемое библиотекой Luxon и обновляющееся каждую секунду. Страница должна иметь три колонки в соотношении 2–8–2, кнопка должна занимать всю центральную колонку, а закрытие окна возможно через крестик и отдельную кнопку «Закрыть».
+
+## 2. Исходный код Luxon и сохранение предыдущего проекта
+
+В отличие от Этапа 1, где был разработан сложный 3D-интерфейс, здесь используется **базовый вариант из задания**:
+
+```javascript
+import { DateTime } from 'luxon';
+
+setInterval(() => {
+  hh.textContent = DateTime
+    .local()
+    .setLocale('ru')
+    .toFormat('dd.LL.yyyy HH:mm:ss');
+}, 1000);
+```
+
+Чтобы не изменять уже готовый проект с 3D-часами и сохранить его для портфолио в первоначальном виде, **была создана новая папка** `luxon-bootstrap-modal`. Это позволило разрабатывать Этап 2 изолированно, не затрагивая предыдущую реализацию, и демонстрировать оба подхода независимо.
+
+## 3. Инициализация проекта и установка зависимостей
+
+В терминале, находясь в папке `luxon-bootstrap-modal`, были выполнены команды:
+
+```bash
+npm init -y
+npm install luxon
+npm install -D webpack webpack-cli serve
+```
+Это установило Luxon, а также dev-зависимости для сборки и локального сервера.
+
+## 4. Настройка Webpack
+
+Создан файл `webpack.config.js` с поддержкой ES-модулей, так как исходный код использует `import`. Чтобы избежать ошибки `sourceType: module`, проект переведён в режим ES-модулей через `"type": "module"` в `package.json`. Конфигурация выглядит так:
+
+```javascript
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
+  mode: 'development',
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
+```
+
+## 5. JavaScript-код с проверкой элемента
+
+В `src/index.js` был добавлен небольшой предохранитель, чтобы скрипт не падал, если элемент `hh` ещё не загружен:
+
+```javascript
+import { DateTime } from 'luxon';
+
+setInterval(() => {
+  const hh = document.getElementById('hh');
+  if (hh) {
+    hh.textContent = DateTime
+      .local()
+      .setLocale('ru')
+      .toFormat('dd.LL.yyyy HH:mm:ss');
+  }
+}, 1000);
+```
+
+## 6. HTML-разметка с Bootstrap 5
+
+**Основные элементы и их классы:**
+
+- **Колонки (2–8–2)**: реализованы сеткой Bootstrap с классами `col-2` и `col-8`.
+
+- **Высота страницы**: класс `min-vh-100` в `<body>` гарантирует, что страница занимает весь экран, а `h-100` у контейнера и ряда растягивает колонки по высоте.
+
+- **Центральная кнопка**: `<button>` с классами `btn btn-danger` (красная кнопка), `btn-lg` (увеличенный размер), `w-100 h-100` (растяжение на всю ширину и высоту родительской колонки), `d-flex align-items-center justify-content-center` (выравнивание текста по центру). Жирный шрифт – `fw-bold`, размер текста – `fs-5`(примерно 20px).
+
+- **Модальное окно**: стандартное окно Bootstrap с классами `modal`, `modal-dialog`, `modal-content`. В заголовке (`modal-title`) выводится имя выполнившего задание. Тело содержит `<div id="hh">` с классами `fs-1 fw-bold` (крупный жирный шрифт). Футер содержит кнопку «Закрыть» (`btn-secondary`) и крестик в заголовке (`btn-close`), которые закрывают окно через `data-bs-dismiss="modal"`.
+
+Итоговый `index.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxon + Bootstrap Modal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="min-vh-100">
+    <div class="container-fluid h-100">
+        <div class="row h-100 justify-content-center">
+            <!-- Левая колонка -->
+            <div class="col-2"></div>
+            <!-- Центральная колонка с кнопкой -->
+            <div class="col-8 d-flex align-items-center justify-content-center bg-white">
+                <button
+                    class="btn btn-danger btn-lg w-100 h-100 fw-bold fs-5 d-flex align-items-center justify-content-center"
+                    data-bs-toggle="modal" data-bs-target="#timeModal">
+                    Показать время
+                </button>
+            </div>
+            <!-- Правая колонка -->
+            <div class="col-2"></div>
+        </div>
+    </div>
+    
+    <!-- Модальное окно -->
+    <div class="modal fade" id="timeModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Выполнила: Таисия Зверева</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div id="hh" class="fs-1 fw-bold"></div>
+                </div>
+                <div class="modal-footer justify-content-end">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="dist/main.js"></script>
+</body>
+</html>
+```
+![html-luxon-stage2](/hugo-portfolio/images/html-luxon-stage2.jpg)
+
+## 7. Сборка и локальный запуск
+
+Сборка выполнена командой:
+
+```bash
+npx webpack
+```
+
+После успешной сборки (файл `dist/main.js` создан) запущен локальный сервер:
+
+```bash
+npx serve .
+```
+
+Приложение открыто в браузере по адресу `http://localhost:3000`. При нажатии на красную кнопку «Показать время» появляется модальное окно с именем и динамической датой/временем в формате `дд.мм.гггг чч:мм:сс`. Окно закрывается крестиком или кнопкой «Закрыть».
+
+![luxon-bootstrap-stage2](/hugo-portfolio/images/luxon-bootstrap-stage2.jpg)
+
+## 8. Заключение
+
+Все требования Этапа 2 выполнены. Создание отдельной папки для этого этапа позволило сохранить в неизменном виде проект с 3D-часами и продемонстрировать оба подхода в портфолио. 
