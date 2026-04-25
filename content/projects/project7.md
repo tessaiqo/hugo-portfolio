@@ -1,5 +1,5 @@
 +++
-title = "Webpack"
+title = "Webpack + Этап 2"
 date = "2026-04-22"
 description = "Отчёт по заданию"
 tags = ["hugo", "theme", "web-development", "open-source"]
