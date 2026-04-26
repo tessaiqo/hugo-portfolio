@@ -244,7 +244,7 @@ Webpack обеспечивает максимальную гибкость и к
 
 ## 9. Публикация 
 
-Ссылка на репозиторий с исходниками: <https://github.com/tessaiqo/luxon-vite-stage3)>
+Ссылка на репозиторий с исходниками: <https://github.com/tessaiqo/luxon-vite-stage3>
 
 Ссылка на GitHub Pages: <https://tessaiqo.github.io/luxon-vite-stage3/>
 
